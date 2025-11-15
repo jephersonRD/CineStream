@@ -5,228 +5,115 @@
 </p>
 
 <p align="center">
-  <strong>Tu plataforma para descubrir y disfrutar Películas, Series y Anime</strong><br/>
-  Interfaz moderna tipo Cuevana, datos en tiempo real desde TMDB/Jikan, reproductor preparado para múltiples fuentes y progreso de visionado.
-</p>
-
-<p align="center">
-  <a href="#caracteristicas">Características</a> •
-  <a href="#demo">Demo</a> •
-  <a href="#instalacion">Instalación</a> •
-  <a href="#configuracion">Configuración</a> •
-  <a href="#scripts">Scripts</a> •
-  <a href="#arquitectura">Arquitectura</a> •
-  <a href="#capturas">Capturas</a> •
-  <a href="#roadmap">Roadmap</a>
+  <strong>CineStream</strong> es un proyecto personal creado por <a href="https://github.com/jephersonRD">@jephersonRD</a> que explora cómo construir una experiencia moderna de streaming para películas, series y anime, con una estética inspirada en plataformas populares como Cuevana.
 </p>
 
 ---
 
-## Características
+## ¿De qué trata CineStream?
 
-- UI moderna inspirada en plataformas de streaming
-- Enrutamiento con `HashRouter` para funcionar en subdirectorios o archivos locales
-- Integración con APIs públicas:
-  - TheMovieDB (TMDB) para películas y series (metadatos, tendencias, populares, etc.)
-  - Jikan (MyAnimeList) para anime
-- Páginas principales: Inicio, Películas, Series, Anime, Búsqueda, Detalles, Reproductor
-- Reproductor preparado para múltiples fuentes (trailers/embeds ahora; listo para HLS/MP4 legales)
-- Selector de Temporada/Episodio con indicador de visto y barra de progreso (Series)
-- Truncado de descripciones con "Ver más / Ver menos"
-- Landing fallback en `public/index.html` (se oculta automáticamente al montar React)
+CineStream es una interfaz web enfocada en la experiencia del usuario para descubrir y disfrutar contenido audiovisual. Su objetivo es ofrecer:
 
-> Nota legal: TMDB y Jikan proveen metadatos. Para reproducir contenido completo debes usar fuentes/streams legales (p. ej. Mux, Cloudflare Stream, AWS CloudFront + HLS). Este proyecto no integra sitios de terceros no autorizados.
+- Descubrimiento ágil de contenido (tendencias, populares, novedades)
+- Fichas visuales atractivas con sinopsis, géneros y calificaciones
+- Navegación por secciones: Películas, Series y Anime
+- Una experiencia cuidada para series: selector de temporada/episodio, indicador de visto y progreso
+- Un reproductor preparado para múltiples fuentes legales (trailers/embeds por ahora), con la arquitectura lista para integrar HLS/MP4 propios en el futuro
+
+El proyecto pone énfasis en el diseño, la navegación fluida y una base técnica sólida que permita crecer hacia integraciones de streaming legítimas.
 
 ---
 
-## Demo
+## Visión y objetivos
 
-- Desarrollo (dev server): `http://localhost:3002/#/` (puerto configurable)
-- Estático (producción): `http://localhost:5000/#/`
+- Crear una UI moderna, rápida y agradable para explorar cine, series y anime
+- Mantener una arquitectura clara y extensible para integrar proveedores de video legales (HLS/MP4)
+- Priorizar la experiencia de series con una gestión transparente de temporadas y episodios
+- Respetar buenas prácticas de accesibilidad y desempeño
 
-> Si prefieres la versión de build estático, usa el script `serve_build.bat` (ver Scripts).
-
----
-
-## Requisitos
-
-- Node.js 18+ (recomendado) / 20+
-- npm 8+
+> Importante: CineStream usa APIs públicas de metadatos (TMDB y Jikan) para información, pósters y estructura de temporadas/episodios. No aloja ni distribuye contenido con derechos. La reproducción completa de títulos requiere integrar fuentes legales propias (no incluidas), como Mux, Cloudflare Stream o AWS.
 
 ---
 
-## Instalación
+## Público al que va dirigido
 
-```bash
-# Clona el repo
-# git clone https://github.com/tu-usuario/CineStream.git
-# cd CineStream/cinestream
-
-# Instala dependencias
-npm install
-```
+- Entusiastas del frontend interesados en UIs tipo streaming
+- Desarrolladores que busquen referencias para construir catálogos audiovisuales
+- Creadores que quieran una base para integrar sus propios streams legales
 
 ---
 
-## Configuración
+## Características clave
 
-Crea un archivo `.env` en la carpeta `cinestream` con tu clave de TMDB:
-
-```
-# Puerto del dev-server
-PORT=3002
-
-# API Key de TMDB (solo metadatos)
-REACT_APP_TMDB_API_KEY=TU_API_KEY_TMDB
-```
-
-- TMDB (gratuita): https://www.themoviedb.org
-- Jikan (anime, no requiere clave): https://api.jikan.moe
-
-> Importante: `.env` se lee al iniciar el dev server. Si cambias valores, reinicia `npm start`.
+- Estética oscura tipo “cine”, con secciones y tarjetas pulidas
+- Inicio con carruseles, grillas y bloques temáticos
+- Páginas: Inicio, Películas, Series, Anime, Búsqueda, Detalle y Reproductor
+- Series con selector de temporada y episodios, más:
+  - Indicador de "visto" (👁️)
+  - Barra de progreso por episodio (persistencia local)
+- Descripciones largas con truncado elegante y botón "Ver más / Ver menos"
+- Fallback estático en `public/index.html` para mejorar la percepción de carga
 
 ---
 
-## Scripts
+## Diseño y experiencia
 
-```bash
-# Desarrollo
-npm start
-
-# Build de producción
-npm run build
-
-# Test (si aplica)
-npm test
-
-# Lint (si aplica)
-npm run lint
-```
-
-Scripts Windows útiles incluidos:
-
-- `start_dev_5000.bat`: inicia el dev server en el puerto 5000.
-- `serve_build.bat`: construye y sirve el build estático en el puerto 5000.
-
-```bat
-# Uso típico
-start_dev_5000.bat
-# o
-serve_build.bat
-```
+- Paleta oscura con acentos en rojo para acciones clave
+- Tarjetas con sombras suaves, efectos hover y cintillas (HD, 1080p, etc.)
+- Secciones limpias con tipografía legible y jerarquía visual
+- Navegación con HashRouter para funcionar también en subdirectorios
 
 ---
 
-## Estructura principal
-
-```
-cinestream/
-├─ public/
-│  ├─ index.html        # landing fallback + root para React
-│  └─ manifest.json
-├─ src/
-│  ├─ components/
-│  │  ├─ Navbar/
-│  │  ├─ Hero/
-│  │  ├─ MovieGrid/
-│  │  ├─ MovieSlider/
-│  │  └─ Footer/
-│  ├─ pages/
-│  │  ├─ Home/
-│  │  ├─ Movies/
-│  │  ├─ Series/           # SeriesDetail incluye selector temporada/episodio
-│  │  ├─ Anime/
-│  │  ├─ MovieDetail/
-│  │  ├─ SeriesDetail/
-│  │  ├─ AnimeDetail/
-│  │  └─ Player/
-│  ├─ services/
-│  │  └─ api.js            # TMDB + Jikan + helpers
-│  ├─ utils/
-│  │  └─ watchProgress.js  # progreso localStorage (visto/porcentaje)
-│  ├─ App.js
-│  ├─ index.js
-│  └─ index.css
-└─ README.md
-```
-
----
-
-## Arquitectura
+## Stack y fuentes de datos
 
 - React + styled-components
-- React Router con HashRouter
-- Servicios HTTP:
-  - TMDB para películas/series (metadatos) usando `REACT_APP_TMDB_API_KEY`
-  - Jikan para anime (sin clave)
-- Player preparado para:
-  - `iframe` (trailers/embeds)
-  - `<video>` (MP4)
-  - Integración futura con HLS (m3u8) vía `hls.js`
-- Persistencia local de progreso por contenido (localStorage)
+- React Router (HashRouter)
+- APIs de metadatos:
+  - TMDB (películas y series)
+  - Jikan (anime)
+- Persistencia local para progreso y "visto" (localStorage)
+
+> CineStream no integra ni promueve sitios de streaming no autorizados. La arquitectura del reproductor está preparada para integrar fuentes legales cuando el creador lo disponga.
 
 ---
 
-## Capturas
-
-> Reemplaza estas rutas con tus imágenes reales si lo deseas (colócalas en `docs/` o usa las que hay en `public/`).
+## Capturas (vista previa)
 
 <p align="center">
-  <img src="./public/logo192.png" alt="Logo pequeño" width="80" />
+  <img src="./public/logo192.png" alt="Logo secundario" width="80" />
 </p>
 
-- Home (tendencias, sliders)
-- Detalle de Película/Serie/Anime (ficha, sinopsis con truncado)
-- Series: selector de temporada/episodio con indicador de visto y progreso
-- Player con reproducción y guardado de progreso
+- Home: carruseles y grillas de contenido
+- Detalle: ficha visual con sinopsis truncada
+- Series: selector de temporada/episodios con progreso y "visto"
+- Reproductor: preparado para múltiples fuentes (embeds ahora; HLS/MP4 en roadmap)
+
+> Si clonas el proyecto, puedes añadir capturas reales en una carpeta `docs/` y referenciarlas aquí.
 
 ---
 
-## Troubleshooting
+## Créditos y autor
 
-- ENOENT package.json
-  - Asegúrate de ejecutar los comandos dentro de `cinestream/`:
-  ```bash
-  cd C:\Users\Usuario\Documents\code\cinestream
-  npm start
-  ```
-- "Upgrade Required" en desarrollo
-  - Usa el build estático: `serve_build.bat` y abre `http://localhost:5000/#/`.
-- Rutas rompen al abrir por archivo
-  - Se usa `HashRouter`, siempre navega con `#/` (ej: `http://localhost:5000/#/peliculas`).
-- No se ven datos de películas/series
-  - Revisa tu `REACT_APP_TMDB_API_KEY` y reinicia `npm start`.
+Proyecto creado por:
+
+- Creador: **@jephersonRD**
+- GitHub: https://github.com/jephersonRD/CineStream
+- YouTube: https://www.youtube.com/channel/UCm-l4Ek4AGfBEqVWXsb25PA?app=desktop
+- TikTok: https://www.tiktok.com/@jepherson_rd
 
 ---
 
-## Roadmap
+## Roadmap (alto nivel)
 
-- [ ] Estilos avanzados tipo Cuevana (tarjetas, badges HD/4K, sliders custom)
-- [ ] Selector de episodios con progreso para Anime
-- [ ] Player con HLS (`hls.js`) y múltiples fuentes
-- [ ] Paginación e Infinite Scroll
-- [ ] Modo oscuro/tema personalizable
-
----
-
-## Contribuir
-
-1. Fork ✨
-2. Crea una rama: `git checkout -b feature/mi-feature`
-3. Commit: `git commit -m "feat: mi feature"`
-4. Push: `git push origin feature/mi-feature`
-5. Pull Request
+- Mejoras visuales en sliders y tarjetas (badges HD/4K, transiciones)
+- Selector de episodios con progreso para Anime
+- Reproductor con soporte HLS (`hls.js`) y selección de fuente/calidad
+- Paginación / Infinite scroll
+- Temas personalizables (modos de color)
 
 ---
 
-## Licencia
+## Nota legal
 
-Este proyecto es solo con fines educativos y demostrativos. Verifica los términos de uso de TMDB y Jikan.
-
----
-
-## Agradecimientos
-
-- [TMDB](https://www.themoviedb.org/) por su API de metadatos de cine/series.
-- [Jikan](https://jikan.moe/) por exponer datos de MyAnimeList.
-- Comunidad React por las librerías utilizadas.
+CineStream es un proyecto con fines educativos. TMDB y Jikan proveen metadatos; las imágenes y marcas pertenecen a sus respectivos dueños. La reproducción de contenido completo requiere fuentes legales bajo tus propios términos y licencias.
